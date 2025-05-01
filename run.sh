@@ -93,17 +93,17 @@ download_model_files() {
 install_dependencies() {
     echo "Installing dependencies..."
     
-    # Install PyTorch based on CUDA availability
+    # Install PyTorch and torchvision with specific versions based on CUDA availability
     if detect_cuda; then
         echo "Installing PyTorch with CUDA $CUDA_VERSION support..."
-        pip install torch>=2.0.1 torchaudio>=2.0.2 --index-url https://download.pytorch.org/whl/cu118 || {
-            echo "Failed to install torch and torchaudio with CUDA support."
+        pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cu118 || {
+            echo "Failed to install torch and torchvision with CUDA support."
             exit 1
         }
     else
         echo "Installing PyTorch CPU version..."
-        pip install torch>=2.0.1 torchaudio>=2.0.2 --index-url https://download.pytorch.org/whl/cpu || {
-            echo "Failed to install torch and torchaudio CPU version."
+        pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu || {
+            echo "Failed to install torch and torchvision CPU version."
             exit 1
         }
     fi
